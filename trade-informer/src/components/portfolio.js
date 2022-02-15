@@ -18,7 +18,9 @@ const Portfolio = () => {
                 </PortfolioContextProvider>
             </div>
             <div className="row">
+                <PortfolioContextProvider>
                 <AddInvestmentModal />
+                </PortfolioContextProvider>
             </div>
         </div>
     );

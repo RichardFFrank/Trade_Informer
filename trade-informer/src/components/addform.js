@@ -2,24 +2,23 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { PortfolioContext } from "../contexts/portfoliocontext";
 import { useContext, useState } from "react";
-import axios from "axios";
 
 const Addform = () => {
     const { addInvestment } = useContext(PortfolioContext)
 
     const [newInvestment, setNewInvestment] = useState({
-        investment:"", quantity:"", price_paid:"", user:"richard.f.frank@gmail.com"
+        investment:"", quantity:"", price_paid:"", email:"richard.f.frank@gmail.com"
     });
 
     const onInputChange = (event) => {
         setNewInvestment({...newInvestment, [event.target.name]: event.target.value})
     }
 
-    const {investment, quantity, price_paid, user } = newInvestment;
+    const {investment, quantity, price_paid, email } = newInvestment;
      
     const handleSubmit = (event) => {
         event.preventDefault();
-        addInvestment(investment, quantity, price_paid, user);
+        addInvestment(investment, quantity, price_paid, email);
     }
 
     return (
@@ -40,7 +39,7 @@ const Addform = () => {
             <Form.Label></Form.Label>
                 <Form.Control type="email" placeholder="Enter the average cost basis of your investment." name="email" value="richard.f.frank@gmail.com" onChange= { (event) => onInputChange(event)} required></Form.Control>
         </Form.Group>
-        <Button variant="primary" type="submit" block>
+        <Button variant="primary" type="submit">
           Add Investment
         </Button>
         </Form>

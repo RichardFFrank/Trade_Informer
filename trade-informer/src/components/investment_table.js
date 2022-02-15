@@ -1,10 +1,12 @@
 import React from 'react';
 import InvestmentRow from './investment_row';
 import { useContext } from "react";
-import { PortfolioContext } from "../contexts/portfoliocontext";
+import PortfolioContextProvider, { PortfolioContext } from "../contexts/portfoliocontext";
 
 function InvestmentTable() {
   const {investments} = useContext(PortfolioContext);
+
+  console.log(investments);
 
   return (
     <table className='table'>
@@ -22,7 +24,10 @@ function InvestmentTable() {
       <tbody>
         {
         investments.map(investment => {
-          return <InvestmentRow key={investment.investment} investment={investment} />
+          
+          return (
+              <InvestmentRow key={investment._id} investment={investment} />
+          )
         })
       }
       </tbody>
