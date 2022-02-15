@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Link, Router } from "react-router-dom";
+import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // Import components
@@ -7,6 +7,7 @@ import About from "./components/about";
 import Portfolio from "./components/portfolio";
 import Login from "./components/login";
 import Research from "./components/research";
+import PortfolioContextProvider from "./contexts/portfoliocontext";
 
 
 function App() {

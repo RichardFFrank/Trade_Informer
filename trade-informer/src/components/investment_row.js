@@ -1,7 +1,7 @@
 import React from 'react';
 import Button from "react-bootstrap/Button";
 
-function Investment_Row( {investment }) {
+function InvestmentRow( {investment }) {
   return (
     <tr>
         <td>{investment.investment}</td>
@@ -16,4 +16,4 @@ function Investment_Row( {investment }) {
   )
 }
 
-export default Investment_Row
+export default InvestmentRow
