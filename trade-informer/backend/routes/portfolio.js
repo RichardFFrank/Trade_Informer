@@ -5,13 +5,13 @@ const { response } = require('express');
 // This route lists all items in the portfolio table. need to restrict based on logged in user.
 
 router.route('/').get((request, response) => {
-    Portfolio.find()
+    Portfolio.find({}).select('investment quantity price_paid user')
         .then(exercises => response.json(exercises))
         .catch(error => response.status(400).json("Error: "+Error));
 });
 
 router.route('/add').post((request, response) => {
-
+    console.log(request.body);
     const investment = request.body.investment;
     const quantity = Number(request.body.quantity);
     const price_paid = Number(request.body.price_paid);

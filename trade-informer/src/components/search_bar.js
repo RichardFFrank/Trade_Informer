@@ -12,7 +12,7 @@ function SearchBar() {
         <>
             <form>
                 <div className='form-group'>
-                    <input type="text" className='form-control' id="search" aria-describedby='searchbar' placeholder='Search for an investment to research. Press Enter to Submit' onChange={event => setSearch(event.target.value)}></input>
+                    <input type="text" className='form-control' id="search" aria-describedby='searchbar' placeholder='Search for an investment to research.' onChange={event => setSearch(event.target.value)}></input>
                 </div>
             </form>
             <div className="row">
@@ -30,7 +30,7 @@ function SearchBar() {
                         <div className='col-sm'>
                         <Card style={{ width: '24rem'}}>
                             <Card.Body>
-                                <Card.Title>{post.security}</Card.Title>
+                                <Card.Title>{post.security} Corporate Summary</Card.Title>
                                 <Card.Text>
                                     {post.summary}
                                 </Card.Text>

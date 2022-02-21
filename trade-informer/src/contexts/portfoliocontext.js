@@ -1,5 +1,4 @@
-import { createContext, useState } from "react"
-import { useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import portfolioService from "../services/portfolio";
 import axios from "axios";
 
@@ -14,7 +13,7 @@ const PortfolioContextProvider = (props) => {
     }, []);
 
     const retrieveInvestments = () => {
-        portfolioService.getAll()
+        portfolioService.find(props.jwt.user_id)
             .then(response => {
                 setInvestments([].concat(response.data));
             })
@@ -23,11 +22,14 @@ const PortfolioContextProvider = (props) => {
             });
     };
 
-const addInvestment = (investment, quantity, price_paid, email) => {
-    const newInvestment = { investment:investment, quantity:Number(quantity), price_paid:Number(price_paid), user:email}
+const addInvestment = (investment, quantity, price_paid, user_id) => {
+    setInvestments([...investments, {investment:investment, quantity:quantity, price_paid:price_paid, user:user_id}]);
+    console.log("PC: "+user_id);
+    const newInvestment = { investment:investment, quantity:Number(quantity), price_paid:Number(price_paid), user:user_id}
+    console.log(newInvestment);
     axios.post(`http://127.0.0.1:3002/portfolio/add`, newInvestment)
     .then(response => {
-        setInvestments([...investments, {newInvestment}])
+        console.log("Investment Added")
     })
     .catch(error => {
         console.log(error);
@@ -58,7 +60,7 @@ const updateInvestment = (id, updatedInvestment) => {
 }
 
     return (
-        <PortfolioContext.Provider value={{investments, addInvestment, deleteInvestment, updateInvestment}}>
+        <PortfolioContext.Provider value={{investments, addInvestment, deleteInvestment, updateInvestment, retrieveInvestments}}>
             {props.children}
         </PortfolioContext.Provider>
     )

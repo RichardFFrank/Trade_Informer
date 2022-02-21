@@ -7,11 +7,11 @@ const jwt = require('jsonwebtoken');
 
 
 router.route('/').post(async (request, response) => {
-    console.log("login Works");
-
     try {
         // get email and pass from user
-        const { email, password } = request.body;
+        const email = request.body.email;
+        const password = request.body.password;
+
         
         // validate that we have both an email and a password
         if (!(email && password)) {
@@ -25,13 +25,12 @@ router.route('/').post(async (request, response) => {
         if (user && (await bcrypt.compare(password, user.password))) {
             // create JWT token
             const token = jwt.sign(
-                { user_id: user._id, email },
+                { user_id: user._id, email, first_name: user.first_name, last_name: user.last_name },
                 process.env.TOKEN_KEY,
                 {
                     expiresIn: "24h",
                 }
             );
-
             //save the current token for the user.
             user.token = token;
             

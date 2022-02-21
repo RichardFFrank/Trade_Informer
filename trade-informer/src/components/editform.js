@@ -3,14 +3,12 @@ import Button from "react-bootstrap/Button";
 import { PortfolioContext } from "../contexts/portfoliocontext";
 import { useContext, useState } from "react";
 
-const Editform = ( {editInvestment}) => {
-
-    const id = editInvestment._id;
-
-    const [investment, setInvestment] = useState(editInvestment.investment);
-    const [quantity, setQuantity] = useState(editInvestment.quantity);
-    const [price_paid, setPrice_Paid] = useState(editInvestment.price_paid);
-    const [user, setUser] = useState("richard.f.frank@gmail.com")
+const Editform = ( {editInvestment} ) => {
+    const id = editInvestment.investment._id;
+    const [investment, setInvestment] = useState(editInvestment.investment.investment);
+    const [quantity, setQuantity] = useState(editInvestment.investment.quantity);
+    const [price_paid, setPrice_Paid] = useState(editInvestment.investment.price_paid);
+    const [user, setUser] = useState(editInvestment.user.email);
 
     const { updateInvestment } = useContext(PortfolioContext)
 
@@ -20,8 +18,6 @@ const Editform = ( {editInvestment}) => {
         event.preventDefault();
         updateInvestment(id, updatedInvestment);
     }
-
-
 
     return (
         <Form onSubmit={handleSubmit}>

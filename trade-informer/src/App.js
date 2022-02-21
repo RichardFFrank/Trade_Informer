@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -7,24 +7,26 @@ import About from "./components/about";
 import Portfolio from "./components/portfolio";
 import Login from "./components/login";
 import Research from "./components/research";
-import PortfolioContextProvider from "./contexts/portfoliocontext";
-
+import UserContextProvider from "./contexts/usercontext";
 
 function App() {
-  //here we use react hooks to make the user state.
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = useState(false);
+  const handleLogin = () => setUser(true);
+  const handleLogout = () => setUser(false);
 
-  // async functions for login and log-out
-  async function login(user = null) {
-    setUser(user);
-  }
-
-  async function logout() {
-    setUser(null);
+  let currAuthToken = localStorage.getItem("token");
+  
+  // if (currAuthToken) {
+  //   setUser(true);
+  // }
+  
+  const logout = () => {
+    setUser(false);
   }
 
   return ( 
     <div>
+      <UserContextProvider>
       <nav className="navbar navbar-expand navbar-dark bg-dark">
         <a href="/about" className="navbar-brand">Trade Informer</a>
         <div className="navbar-nav mr-auto">
@@ -45,7 +47,7 @@ function App() {
           </li>
           <li className="nav-item">
             { user ? (
-              <a onClick={logout} className="nav-link" style={{cursor:'pointer'}}>
+              <a onClick={ logout } className="nav-link" style={{cursor:'pointer'}}>
                 Logout {user.name}
               </a>
             ) : (
@@ -63,7 +65,7 @@ function App() {
         <Route path={"/"} element={<About/>} />
         <Route path={"/research"} element={<Research/>}/>
         <Route path={"/portfolio"} element={<Portfolio/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route path={"/login"} element={<Login/>}/>
       </Routes>
     </div>
     <div>
@@ -74,6 +76,7 @@ function App() {
         </div>
       </footer>
     </div>
+    </UserContextProvider>
   </div>
   );
 }
