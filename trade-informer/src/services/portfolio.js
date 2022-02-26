@@ -13,8 +13,8 @@ class PortfolioDataService {
         return http.post("/portfolio/add", data);
     }
 
-    updateInvestment(data) {
-        return http.put("/portfolio/update/", data);
+    updateInvestment(id, data) {
+        return http.put(`/portfolio/update/${id}`, data);
     }
 
     deleteInvestment(id) {

@@ -1,5 +1,9 @@
 import { createContext, useState, useEffect } from "react";
+import UserDataService from "../services/userservice";
+
 import axios from "axios";
+
+
 
 export const UserContext = createContext();
 
@@ -8,9 +12,8 @@ const UserContextProvider = (props) => {
 
     const loginUser = (email, password) => {
         const currUser = {email:email, password:password};
-        axios.post(`http://127.0.0.1:3002/login`, currUser)
+        UserDataService.login(currUser)
             .then(response => {
-                console.log(response.data);
                 setCurrUser({email:email, token:response.data.token});
                 localStorage.setItem("token", response.data.token);
             })
@@ -23,7 +26,7 @@ const UserContextProvider = (props) => {
         
     }
 
-    const validateJWT = (jwt) => {
+    const validateJWT = (jwt) => { // to - do
         
     }
 
