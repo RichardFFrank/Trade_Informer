@@ -47,7 +47,9 @@ function SearchBar() {
                     </Form>
                 </Col><Col>
                 </Col>
-                <div>{summary}</div>
+                {summary ? 
+                <div><h1> Overview of {search}</h1>
+                     {summary}</div> : <div></div>}
             </Row>
         </>
     )
