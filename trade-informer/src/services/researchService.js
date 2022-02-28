@@ -1,8 +1,15 @@
-import http from "../http-common";
+import SearchBar from "../components/search_bar";
+import http from "../http-newsservice"
+
 
 class ResearchDataService {
-    find(query) {
-        return http.get(`/research/${query}`);
+    getCompanyInfo(query) {
+        // let payload = `{search:"${query}"}`
+        let payload = {
+            search: query
+        }
+
+        return http.post("https://cs361-wikiscraper.herokuapp.com/wiki-service",payload)
     }
 }
 

@@ -1,97 +1,54 @@
 import React from 'react';
+import { createContext, useState, useEffect } from 'react';
+
 import Data from "../MOCK_DATA.json";
 import Card from "react-bootstrap/Card";
-import { useState } from 'react';
-
+import Button from 'react-bootstrap/Button';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+import Form from 'react-bootstrap/Form';
+import researchService from '../services/researchService';
 
 
 function SearchBar() {
-    const [search, setSearch] = useState("")
+    const [search, setSearch] = useState("");
+
+    const [summary, setSummary] = useState("");
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(search);
+        getCompanySummary(search);
+    }
+
+    const getCompanySummary = (company) => {
+        researchService.getCompanyInfo(company)
+            .then(response => {
+                setSummary(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
 
     return (
         <>
-            <form>
-                <div className='form-group'>
-                    <input type="text" className='form-control' id="search" aria-describedby='searchbar' placeholder='Search for an investment to research.' onChange={event => setSearch(event.target.value)}></input>
-                </div>
-            </form>
-            <div className="row">
-                <br></br>
-                {Data.filter((post) => {
-                    if (search === "") {
-                        return null;
-                    } else if (post.security.toLowerCase().includes(search.toLowerCase())) {
-                        console.log(post)
-                        return post;
-                    }
-                }).map((post) => (
-                    <>
-                    <div className='row' key={post.security} >
-                        <div className='col-sm'>
-                        <Card style={{ width: '24rem'}}>
-                            <Card.Body>
-                                <Card.Title>{post.security} Corporate Summary</Card.Title>
-                                <Card.Text>
-                                    {post.summary}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                        </div>
-                        <div className='col-sm'>
-                            <img className="img-fluid" src={ require('./sample_ticker.png') } height="300"  width="300" alt="Stock Chart Placeholder"></img>
-                        </div>
-                    </div>
-                    <div className='row'>
-                        <div className='col-sm'>
-                        <Card style={{ width: '24rem'}}>
-                            <Card.Body>
-                                <Card.Title>News About {post.security}</Card.Title>
-                                <Card.Text>
-                                    {post.summary}
-                                </Card.Text>
-                            </Card.Body>
-                        </Card>
-                        </div>
-                        <div className='col-sm'>
-                        <table className='table'>
-                            <thead>
-                                <tr>
-                                    <th>Broker</th>
-                                    <th>Bid</th>
-                                    <th>Ask</th>
-                                    <th>volume</th>
-                                    <th>Fees</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Robinhood</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                </tr>
-                                <tr>
-                                    <td>e-Trade</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                </tr>
-                                <tr>
-                                    <td>Charles Schwab</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                    <td>Placeholder</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        </div>
-                    </div>
-                    </>
-                ))}
-            </div>
+            <Row>
+                <Col></Col>
+                <Col xs={6}>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="mb-3" controlId="investment_name">
+                            {/* https://stackoverflow.com/questions/12858979/put-input-submit-on-same-line-as-input-box/12859038 */}
+                            <Form.Control type="text" placeholder="Search for an investment to research." name="search" value={search} onChange={(event) => setSearch(event.target.value)}></Form.Control>
+                        <Button variant="primary" type="submit">
+                            Search
+                        </Button>
+                        </Form.Group>
+                    </Form>
+                </Col><Col>
+                </Col>
+                <div>{summary}</div>
+            </Row>
         </>
     )
 }
