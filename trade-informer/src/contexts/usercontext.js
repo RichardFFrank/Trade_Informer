@@ -1,9 +1,5 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 import UserDataService from "../services/userservice";
-
-import axios from "axios";
-
-
 
 export const UserContext = createContext();
 
@@ -21,17 +17,34 @@ const UserContextProvider = (props) => {
                 if (error.response.status == 400){
                     alert("invalid username or password");
                 }
-                console.log(error.response);
+                console.log(error.response.data);
             });
         
     }
 
-    const validateJWT = (jwt) => { // to - do
-        
+    const registerUser = (firstName, lastName, email, password, ) => {
+        const newUser = {firstName: firstName, lastName:lastName, email:email, password:password};
+        UserDataService.register(newUser)
+            .then(response => {
+                setCurrUser({email:email, token:response.data.token});
+                if (localStorage.getItem("token")){
+                    localStorage.removeItem("token");
+                    localStorage.setItem("token", response.data.token);
+                } else {
+                    localStorage.setItem("token", response.data.token);
+                }
+                return "success";
+            })
+            .catch(error => {
+                if (error.response.status == 400){
+                    alert("invalid parameters.")
+                }
+                console.log(error.response.data);
+            });
     }
 
     return (
-        <UserContext.Provider value={{currUser, loginUser}}>
+        <UserContext.Provider value={{currUser, loginUser, registerUser}}>
             {props.children}
         </UserContext.Provider>
     )

@@ -18,7 +18,6 @@ const aboutRouter = require('./routes/about');
 const researchRouter = require('./routes/research');
 const registerRouter = require('./routes/register');
 const loginRouter = require('./routes/login');
-const welcomeTestRouter = require('./routes/welcomeTest');
 
 app.use('/register', registerRouter);
 app.use('/login', loginRouter);
@@ -26,9 +25,5 @@ app.use('/login', loginRouter);
 app.use('/portfolio', portfolioRouter);
 app.use('/about', aboutRouter);
 app.use('/research', researchRouter);
-
-app.use('/welcomeTest', welcomeTestRouter);
-
-
 
 module.exports = app;

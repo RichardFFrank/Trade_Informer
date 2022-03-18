@@ -1,14 +1,10 @@
-import React, { useContext, useState } from "react";
-import Form from "react-bootstrap/Form";
+import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
-import UserContext from "../contexts/usercontext";
-import UserContextProvider from "../contexts/usercontext";
-import { Modal } from "react-bootstrap";
+import Modal from "react-bootstrap/Modal";
 import LoginForm from "./loginform";
+import RegisterForm from "./registerform"
 
 function Login() {
-
-    // const {user, loginUser} = useContext(UserContext);
     const [loginForm, setLoginForm] = useState(false);
     const openLogin = () => setLoginForm(true);
     const closeLogin = () => setLoginForm(false);
@@ -27,8 +23,6 @@ function Login() {
             </p>
             <Button variant="primary" onClick={openLogin}>Log-in</Button>
             <Button variant="info" onClick={openRegisterForm}>Register</Button>
-
-
             <Modal show={loginForm} onHide={closeLogin}>
                 <Modal.Header closeButton>
                     <Modal.Title>Please Enter Your Username and Password</Modal.Title>
@@ -40,10 +34,10 @@ function Login() {
 
             <Modal show={registerForm} onHide={closeRegisterForm}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Please Enter Your Username and Password</Modal.Title>
+                    <Modal.Title>Complete the fields below to register.</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                        {/* <LoginForm/> */}
+                        <RegisterForm/>
                 </Modal.Body>
             </Modal>
         </div>

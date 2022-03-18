@@ -1,19 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
+import React from "react";
 import InvestmentTable from "./investment_table";
-import PortfolioContextProvider, { PortfolioContext } from "../contexts/portfoliocontext";
-import { Button, Form, Modal } from "react-bootstrap";
-import { UserContext } from "../contexts/usercontext";
+import PortfolioContextProvider from "../contexts/portfoliocontext";
 import jwt_decode from "jwt-decode";
 
 
 
 const Portfolio = () => {
-
-    // need function to validate token.
+    // on load, get current auth token
+    
     let currAuthToken = localStorage.getItem("token");
     let logged_in_user = "";
     let decoded = "user";
-    if (currAuthToken != ""){
+    if (currAuthToken != null){
         decoded = jwt_decode(currAuthToken);
         logged_in_user = decoded.user_id;
     }

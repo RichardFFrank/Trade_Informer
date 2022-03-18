@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import PortfolioContextProvider, { PortfolioContext } from "../contexts/portfoliocontext";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import Editform from './editform';
+import Table from "react-bootstrap/Table";
 import Addform from "./addform";
 import InvestmentRow from './investment_row';
 
@@ -31,7 +31,7 @@ const InvestmentTable = ( {currUser} ) => {
   return (
     <>
       <h2>The total amount you have invested so far is: {formattedSum}</h2>
-      <table className='table'>
+      <Table striped bordered hover>
         <thead>
           <tr key="header">
             <th scope="col">Stock</th>
@@ -39,8 +39,7 @@ const InvestmentTable = ( {currUser} ) => {
             <th scope="col">Price_Paid</th>
             <th scope="col">Latest_Value</th>
             <th scope="col">%_Change</th>
-            <th scope="col">Daily_Trend</th>
-            <th scope="col">Actions</th>
+            <th colSpan={2} scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -56,7 +55,7 @@ const InvestmentTable = ( {currUser} ) => {
             })
           }
         </tbody>
-      </table>
+      </Table>
       <Button variant="primary" onClick={handleShow}>
         Add Investment
       </Button>

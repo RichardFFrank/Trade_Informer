@@ -15,14 +15,3 @@ exports.connect = () => {
             process.exit(1);
         });
 };
-
-
-// const uri = process.env.ATLAS_URI;
-// mongoose.connect(uri);
-
-// // connect to mongoDB database.
-// const connection = mongoose.connection;
-
-// connection.once('open', () => {
-//     console.log("MongoDB Connection Established.")
-// });

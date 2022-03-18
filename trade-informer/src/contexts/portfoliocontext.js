@@ -15,7 +15,7 @@ const PortfolioContextProvider = (props) => {
             .catch(error => {
                 console.log(error);
             });
-    }, [investments]);
+    }, []);
 
 
 const addInvestment = (investment, quantity, price_paid, user_id) => {
@@ -33,15 +33,14 @@ const addInvestment = (investment, quantity, price_paid, user_id) => {
 
 const updateInvestment = (id, updatedInvestment) => {
     // map all investments and set the employee as the updated employee.
+    console.log(id);
     const toUpdate = updatedInvestment;
-    console.log(toUpdate);
     portfolioService.updateInvestment(id, toUpdate)
-    // axios.post(`http://127.0.0.1:3002/portfolio/update/${id}`, toUpdate)
         .then(    
             setInvestments(investments.map((investment) => investment._id === id ? updatedInvestment : investment))
-        )
+            )
         .catch(error => {
-            console.log("Error: "+error);
+            console.log(error);
         })
 }
 
@@ -51,7 +50,7 @@ const deleteInvestment = (id) => {
             setInvestments(investments.filter(investment => investment._id !== id))
         )
         .catch(error => {
-            console.log("Error:" +error)
+            console.log(error)
         });
 }
 

@@ -16,7 +16,6 @@ const Addform = ({currUser}) => {
     const {investment, quantity, price_paid, user_id } = newInvestment;
      
     const handleSubmit = (event) => {
-        event.preventDefault();
         addInvestment(newInvestment.investment, newInvestment.quantity, newInvestment.price_paid, newInvestment.user_id);
     }
 

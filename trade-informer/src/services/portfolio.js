@@ -14,7 +14,7 @@ class PortfolioDataService {
     }
 
     updateInvestment(id, data) {
-        return http.put(`/portfolio/update/${id}`, data);
+        return http.post(`/portfolio/update/${id}`, data);
     }
 
     deleteInvestment(id) {

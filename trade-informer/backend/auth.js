@@ -9,8 +9,6 @@ const validateToken = (request, response, next) => {
 
     if (!token) {
         return response.status(403).send("This action is unauthorized. Get a token and come back.")
-                                                                            //  @TODO: if no token, we don't show the portfolio, if there is a token
-                                                                            //  we do show the portfolio of that user
     }
     try {
         const decodedToken = jwt.verify(token, config.TOKEN_KEY);

@@ -8,10 +8,9 @@ function Editform(props) {
 
     let invProp = props.editInvestment.investment[0].investment;
     let userProp = props.editInvestment.investment[1].user;
-
     const id = invProp._id;
     const [investment, setInvestment] = useState(invProp.investment);
-    const [quantity, setQuantity] = useState(invProp.quantity);
+    const [quantity, setQuantity] = useState(parseInt(invProp.quantity));
     const [price_paid, setPrice_Paid] = useState(invProp.price_paid);
     const [user, setUser] = useState(userProp.user_id);
 
@@ -19,7 +18,6 @@ function Editform(props) {
     const updatedInvestment = {investment, quantity, price_paid, user}
 
     const handleSubmit = (event) => {
-        event.preventDefault();
         updateInvestment(id, updatedInvestment);
     }
 
@@ -37,9 +35,9 @@ function Editform(props) {
             <Form.Label>What was the price when you bought it?</Form.Label>
                 <Form.Control type="number" placeholder="Enter the average cost basis of your investment." name="price_paid" value={price_paid} onChange={(event) => setPrice_Paid(event.target.value)} required></Form.Control>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="investment_price_paid" hidden>
+        <Form.Group className="mb-3" controlId="email" hidden>
             <Form.Label></Form.Label>
-                <Form.Control type="email" placeholder="Enter the average cost basis of your investment." name="email"></Form.Control>
+                <Form.Control type="email" name="email"></Form.Control>
         </Form.Group>
         <Button variant="primary" type="submit">
           Edit Investment
