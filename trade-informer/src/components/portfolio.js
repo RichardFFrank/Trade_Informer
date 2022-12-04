@@ -7,7 +7,6 @@ import jwt_decode from "jwt-decode";
 
 const Portfolio = () => {
     // on load, get current auth token
-    
     let currAuthToken = localStorage.getItem("token");
     let logged_in_user = "";
     let decoded = "user";

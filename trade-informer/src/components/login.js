@@ -9,11 +9,9 @@ function Login() {
     const openLogin = () => setLoginForm(true);
     const closeLogin = () => setLoginForm(false);
 
-    
     const [registerForm, setRegisterForm] = useState(false);
     const openRegisterForm = () => setRegisterForm(true);
     const closeRegisterForm = () => setRegisterForm(false);
-
 
     return (
         <div className="App">

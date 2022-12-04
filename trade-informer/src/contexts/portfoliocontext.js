@@ -4,7 +4,6 @@ import portfolioService from "../services/portfolio";
 export const PortfolioContext = createContext()
 
 const PortfolioContextProvider = (props) => {
-    // user react hooks to create state variables.
     const [investments, setInvestments] = useState([]);
 
     useEffect(() => {
@@ -17,7 +16,7 @@ const PortfolioContextProvider = (props) => {
             });
     }, []);
 
-
+// send the investment to the database
 const addInvestment = (investment, quantity, price_paid, user_id) => {
     const newInvestment = { investment:investment, quantity:Number(quantity), price_paid:Number(price_paid), user:user_id}
     setInvestments([...investments, newInvestment]);

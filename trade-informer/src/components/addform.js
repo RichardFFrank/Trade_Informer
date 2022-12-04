@@ -14,7 +14,8 @@ const Addform = ({currUser}) => {
     }
 
     const {investment, quantity, price_paid, user_id } = newInvestment;
-     
+    
+    // helper function to send the investment to the database on submit.
     const handleSubmit = (event) => {
         addInvestment(newInvestment.investment, newInvestment.quantity, newInvestment.price_paid, newInvestment.user_id);
     }

@@ -50,7 +50,8 @@ function SearchBar() {
                 console.log(error);
             });
     }
-
+    // the function below is a ternary operator that only shows the results once 'search' is submitted.
+    
     return (
         <>
             <Row>

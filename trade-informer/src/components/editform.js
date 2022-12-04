@@ -6,14 +6,15 @@ import { useContext, useState } from "react";
 function Editform(props) {
     const { updateInvestment } = useContext(PortfolioContext)
 
+    // used to simplify property parsing.
     let invProp = props.editInvestment.investment[0].investment;
     let userProp = props.editInvestment.investment[1].user;
+
     const id = invProp._id;
     const [investment, setInvestment] = useState(invProp.investment);
     const [quantity, setQuantity] = useState(parseInt(invProp.quantity));
     const [price_paid, setPrice_Paid] = useState(invProp.price_paid);
     const [user, setUser] = useState(userProp.user_id);
-
 
     const updatedInvestment = {investment, quantity, price_paid, user}
 
